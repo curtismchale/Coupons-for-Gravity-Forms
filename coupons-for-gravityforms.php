@@ -41,7 +41,7 @@ function gf_coupon_add_cpt(){
       'menu_position'         => 5, // sets admin menu position
       //'menu_icon'           => get_stylesheet_directory_uri().'/assets/images/show-post-icon.png',
       'hierarchical'          => false, // funcions like posts
-      'rewrite'               => array('slug' => 'show', 'with_front' => true,), // permalinks format
+      'rewrite'               => array('slug' => 'gfcoupon', 'with_front' => true,), // permalinks format
       'can_export'            => true,
     ) // end array for register_post_type
   ); // end register_post_type
