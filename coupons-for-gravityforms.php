@@ -38,6 +38,7 @@ function gf_coupon_add_cpt(){
         ), // end array for labels
       'description'           => __('Coupons for Gravity Forms'),
       'public'                => true,
+      'show_in_menu'          => false,
       'menu_position'         => 5, // sets admin menu position
       //'menu_icon'           => get_stylesheet_directory_uri().'/assets/images/show-post-icon.png',
       'hierarchical'          => false, // funcions like posts
@@ -48,12 +49,21 @@ function gf_coupon_add_cpt(){
 
 }
 
+/**
+ * Adds the Coupon Menu as a submenu of Gravity Forms
+ *
+ * @since 1.0
+ *
+ * @uses      curent_user_can
+ *
+ * @returns   New menu object
+ */
 add_action('init', 'gf_coupon_add_cpt' );
 
-function gf_coupon_add_menu(){
+function gf_coupon_add_menu( ){
+
+  add_submenu_page( 'options-general.php', 'Coupons for Gravity Forms', 'Coupons', 'manage_options', 'edit.php?post_type=gfcoupon' );
 
 }
-
-//creates the subnav left menu
-add_filter( 'gform_addon_navigation', 'gf_coupon_add_menu' );
+add_action( 'admin_menu', 'gf_coupon_add_menu' );
 ?>
