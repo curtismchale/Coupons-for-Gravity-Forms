@@ -11,7 +11,11 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 /**
+ * Adds the Gravity Form Coupon CPT
  *
+ * @since 1.0
+ *
+ * @uses register_post_type
  */
 function gf_coupon_add_cpt(){
 
