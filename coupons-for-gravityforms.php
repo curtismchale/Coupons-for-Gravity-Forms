@@ -253,4 +253,37 @@ function sfn_gfcoupon_coupon_paypal_query($query_string){
 
     return '&' . $query_string;
 }
+
+    add_action('init', 'sfn_gfcoupon_custom_post_types');
+
+    function sfn_gfcoupon_custom_post_types(){
+
+        register_post_type('gfcoupon', // http://codex.wordpress.org/Function_Reference/register_post_type
+            array(
+                'labels'                => array(
+                    'name'                  => __('Gravity Forms Coupons'),
+                    'singular_name'         => __('Gravity Forms Coupon'),
+                    'add_new'               => __('Add New'),
+                    'add_new_item'          => __('Add New Coupon'),
+                    'edit'                  => __('Edit'),
+                    'edit_item'             => __('Edit Coupon'),
+                    'new_item'              => __('New Coupon'),
+                    'view'                  => __('View Coupon'),
+                    'view_item'             => __('View Coupon'),
+                    'search_items'          => __('Search Coupons'),
+                    'not_found'             => __('No Coupons Found'),
+                    'not_found_in_trash'    => __('No Coupons found in Trash')
+                    ), // end array for labels
+                'description'           => __('Coupons for Gravity Forms'),
+                'public'                => true,
+                'publicly_queryable' 		=> false, // you can't do front end query's
+                'show_in_menu'					=> 'options-general.php',
+                'menu_position'         => 5, // sets admin menu position
+                'hierarchical'          => false, // funcions like posts
+                'supports'              => array('title', 'revisions'),
+                'rewrite'               => array('slug' => 'coupon', 'with_front' => true,), // permalinks format
+                'can_export'            => true,
+            ) // end array for register_post_type
+        ); // end register_post_type
+    }
 ?>
