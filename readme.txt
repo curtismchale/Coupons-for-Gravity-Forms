@@ -26,6 +26,14 @@ folder.
 
 3. Add coupons by adding to the array inside the plugin.
 
+4. Set up the coupon fields in your form with the instructions below.
+
+  You just enter the coupons in the $coupon variable in the code.
+  Then in the Gravity Forms admin you add the "gfcoupon" class to
+  whatever field will be your coupon field, "gfdiscount" to a new single
+  line text field you will need to add, and make sure you have a total
+  field on your form.
+
 == Changelog ==
 
 = 0.1 =
