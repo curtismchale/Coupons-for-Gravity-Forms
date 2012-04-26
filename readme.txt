@@ -17,6 +17,8 @@ Currently it's quick and dirty. You add coupons by adding to the array in the pl
 All discounts are percentage based only. Coupon codes are case sensitive. Only tested
 with PayPal.
 
+** Does not currently handle discounts for subscriptions.
+
 == Installation ==
 
 1. Extract to your wp-content/plugins/
