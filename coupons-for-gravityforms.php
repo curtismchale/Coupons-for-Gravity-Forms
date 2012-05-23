@@ -254,7 +254,17 @@ function sfn_gfcoupon_get_discounted_total( $form ){
 }
 add_filter( 'gform_pre_submission', 'sfn_gfcoupon_get_discounted_total' );
 
-add_filter('gform_paypal_query', 'sfn_gfcoupon_coupon_paypal_query');
+/**
+ * Breaks up the query_sting and applies the discount (if there is one) to the amount
+ * so that the discount is passed to PayPal.
+ *
+ * @param 	string 	$query_string 	req		The query string we are working with
+ *
+ * @return 	string 	The new query with discount (if there is one)
+ *
+ * @since 	0.1
+ * @author	WP Theme Tutorial, SFNdesign
+ */
 function sfn_gfcoupon_coupon_paypal_query($query_string){
 
 	global $newtotal;
@@ -286,4 +296,4 @@ function sfn_gfcoupon_coupon_paypal_query($query_string){
 
     return '&' . $query_string;
 }
-?>
+add_filter('gform_paypal_query', 'sfn_gfcoupon_coupon_paypal_query');?>
