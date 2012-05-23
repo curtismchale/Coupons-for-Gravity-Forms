@@ -138,6 +138,17 @@ function sfn_gfcoupon_add_coupon_support($form){
     return $form;
 }
 
+/**
+ * Gets the form by class or type depending on the values passed.
+ *
+ * @param 	string 	$attr 			req		The attribute you want to find by
+ * @param 	string 	$attr_value 	req		The value you're searching for
+ * @param 			$fields
+ * @return bool
+ *
+ * @since 	0.1
+ * @author 	WP Theme Tutorial, SFNdesign
+ */
 function sfn_gfcoupon_get_field_by($attr, $attr_value, $fields){
 
     foreach($fields as $field){
