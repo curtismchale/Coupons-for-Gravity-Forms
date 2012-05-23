@@ -25,3 +25,5 @@ podcast.xml
 *.kpf
 *uploads/*
 *.swp
+
+.idea/
