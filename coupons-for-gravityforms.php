@@ -121,7 +121,6 @@ function sfn_gfcoupon_add_coupon_support($form){
                         jQuery( totalField ).val( newPrice );
                         jQuery( '.ginput_total_'+formID ).html( '$'+newPrice );
 
-//                        gformCalculateTotalPrice(formID);
                         couponApplied = true;
                     } else {
                         alert('This coupon is not valid.');
