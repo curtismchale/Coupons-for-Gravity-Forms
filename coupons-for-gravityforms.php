@@ -10,6 +10,10 @@ License: GNU General Public License v2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
+
+/* calls the new CPT  that will make up the coupons */
+require_once( plugin_dir_path( __FILE__ ) . '/create-coupon-cpt.php' );
+
 /*
  * Produces print_r inside <pre> limited to development users
  *
