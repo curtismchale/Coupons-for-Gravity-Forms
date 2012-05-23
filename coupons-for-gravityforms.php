@@ -237,12 +237,31 @@ function sfn_gfcoupon_coupon_validation($validation_result){
     return $validation_result;
 }
 
+/**
+ * Gets the new total with discount and passes it to a global so we can
+ * override the total later.
+ *
+ * @param 	object 	$form 	req		The whole form object
+ *
+ * @since 	1.0
+ * @author	WP Theme Tutorial, SFNdesign
+ */
+function sfn_gfcoupon_get_discounted_total( $form ){
+	global $newtotal;
+
+	$newtotal = $_POST['input_3'];
+
+}
+add_filter( 'gform_pre_submission', 'sfn_gfcoupon_get_discounted_total' );
+
 add_filter('gform_paypal_query', 'sfn_gfcoupon_coupon_paypal_query');
 function sfn_gfcoupon_coupon_paypal_query($query_string){
 
+	global $newtotal;
+
     parse_str($query_string, $query);
 
-    $id = 0;
+    $id = 1;
     $amounts = array();
 
     foreach($query as $key => $value){
@@ -257,17 +276,11 @@ function sfn_gfcoupon_coupon_paypal_query($query_string){
 
     }
 
-    if($id) {
-        unset($query['item_name_' . $id]);
+	// remove the original amount and set the new one
+	if( $id ){
         unset($query['amount_' . $id]);
-        unset($query['quantity_' . $id]);
-    }
-
-    foreach($query as $key => &$value) {
-        if(strpos($key, 'amount_') !== false){
-            $value = $value - $discount;
-        }
-    }
+		$query['amount_' . $id] = $newtotal;
+	}
 
     $query_string = http_build_query($query, '', '&');
 
