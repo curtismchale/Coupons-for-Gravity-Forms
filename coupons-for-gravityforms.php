@@ -10,6 +10,26 @@ License: GNU General Public License v2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
+/*
+ * Produces print_r inside <pre> limited to development users
+ *
+ * @param string $data The variable we want to print
+ * @uses get_the_author_meta
+ * @uses current_user_can
+ * @ueses in_array
+ */
+function sfn_gfcoupon_print_r($data) {
+
+  global $current_user;
+
+  if( WP_DEBUG || current_user_can( 'administrator' ) ){
+   echo "<pre>";
+      print_r($data);
+   echo "</pre>";
+  }
+
+}
+
 /**
  * You just enter the coupons in the $coupon variable in the code.
  * Then in the Gravity Forms admin you add the "gfcoupon" class to
