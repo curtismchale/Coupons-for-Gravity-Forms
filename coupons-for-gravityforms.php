@@ -189,7 +189,7 @@ function sfn_gfcoupon_validate_coupon() {
 
 add_filter('gform_validation', 'sfn_gfcoupon_coupon_validation');
 function sfn_gfcoupon_coupon_validation($validation_result){
-    global $coupons;
+    global $coupons, $discount;
 
     $form = $validation_result['form'];
 
@@ -248,62 +248,24 @@ function sfn_gfcoupon_coupon_validation($validation_result){
 }
 
 /**
- * Gets the new total with discount and passes it to a global so we can
- * override the total later.
+ * Updates the product price with the new total so that it sends properly to PayPal
  *
- * @param 	object 	$form 	req		The whole form object
+ * @param $product_info
+ * @param $form
+ * @param $lead
+ * @return mixed
  *
  * @since 	1.0
  * @author	WP Theme Tutorial, SFNdesign
  */
-function sfn_gfcoupon_get_discounted_total( $form ){
-	global $newtotal;
+function sfn_gfcoupon_update_product_info( $product_info, $form, $lead ){
+	global $discount;
 
-	$newtotal = $_POST['input_3'];
+	$id = $form['fields'][0]['id'];
+	$price = $product_info['products'][$id]['price'];
+	$product_info['products'][$id]['price'] = $price - $discount;
 
+	return $product_info;
 }
-add_filter( 'gform_pre_submission', 'sfn_gfcoupon_get_discounted_total' );
-
-/**
- * Breaks up the query_sting and applies the discount (if there is one) to the amount
- * so that the discount is passed to PayPal.
- *
- * @param 	string 	$query_string 	req		The query string we are working with
- *
- * @return 	string 	The new query with discount (if there is one)
- *
- * @since 	0.1
- * @author	WP Theme Tutorial, SFNdesign
- */
-function sfn_gfcoupon_coupon_paypal_query($query_string){
-
-	global $newtotal;
-
-    parse_str($query_string, $query);
-
-    $id = 1;
-    $amounts = array();
-
-    foreach($query as $key => $value){
-
-        if( (int) $value >= 0) {
-            $amounts[] = $value;
-            continue;
-        } else {
-            $id = str_replace('amount_', '', $key);
-            $discount = abs($value);
-        }
-
-    }
-
-	// remove the original amount and set the new one
-	if( $id ){
-        unset($query['amount_' . $id]);
-		$query['amount_' . $id] = $newtotal;
-	}
-
-    $query_string = http_build_query($query, '', '&');
-
-    return '&' . $query_string;
-}
-add_filter('gform_paypal_query', 'sfn_gfcoupon_coupon_paypal_query');?>
+add_filter( 'gform_product_info', 'sfn_gfcoupon_update_product_info', 10, 3 );
+?>
