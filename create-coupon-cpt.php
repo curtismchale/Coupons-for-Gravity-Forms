@@ -55,6 +55,9 @@ add_action( 'init', 'sfn_gfcoupon_coupon_cpt' );
  */
 function sfn_gfcoupon_metaboxes_setup(){
 	add_action( 'add_meta_boxes', 'sfn_gfcoupon_add_post_meta_boxes' );
+
+	// saving our metaboxes
+	add_action( 'save_post', 'sfn_gfcoupon_save_coupon_metabox', 10, 2 );
 }
 add_action( 'load-post.php', 'sfn_gfcoupon_metaboxes_setup' );
 add_action( 'load-post-new.php', 'sfn_gfcoupon_metaboxes_setup' );
@@ -79,20 +82,45 @@ function sfn_gfcoupon_add_post_meta_boxes(){
 
 function sfn_gfcoupon_meta_box( $object, $box ){
 
-	wp_nonce_field( basename( __FILE__ ), 'sfn_gfcoupon_nonce' );
+	wp_nonce_field( 'sfn_gfcoupon_save_coupon', 'sfn_gfcoupon_nonce' );
 ?>
 	<p>
 		<label for="sfn_gfcoupon_name"><?php _e( 'Coupon Name, the value the user will type.' ); ?></label>
 		<br />
-		<input class="left" type="text" name="sfn_gfcoupon_name" id="sfn_gfcoupon_name" value="<?php echo esc_attr( get_post_meta( $object->ID, 'sfn_gfcoupon_name', true ) ); ?>" size="10" />
+		<input class="left" type="text" name="sfn_gfcoupon_name" id="sfn_gfcoupon_name" value="<?php echo esc_attr( get_post_meta( $object->ID, '_sfn_gfcoupon_name', true ) ); ?>" size="10" />
 	</p>
 
 	<p>
 		<label for="sfn_gfcoupon_value"><?php _e( 'Coupon Value, how much off?' ); ?></label>
 		<br />
-		<input class="left" type="text" name="sfn_gfcoupon_value" id="sfn_gfcoupon_value" value="<?php echo esc_attr( get_post_meta( $object->ID, 'sfn_gfcoupon_value', true ) ); ?>" size="10" />
+		<input class="left" type="text" name="sfn_gfcoupon_value" id="sfn_gfcoupon_value" value="<?php echo esc_attr( get_post_meta( $object->ID, '_sfn_gfcoupon_value', true ) ); ?>" size="10" />
 	</p>
 <?php
+}
+
+/**
+ * Saves the Quote meta boxes
+ *
+ * @since 1.0
+ *
+ * @param 	integer $post_id 	required 	The id of the post
+ * @param 	object 	$post 		required	The whole post object
+ *
+ * @return bool/void
+ */
+function sfn_gfcoupon_save_coupon_metabox( $post_id, $post ){
+
+	// check nonce before proceeding
+	if ( ! isset( $_POST[ 'sfn_gfcoupon_nonce' ] ) || ! wp_verify_nonce( $_POST[ 'sfn_gfcoupon_nonce' ], 'sfn_gfcoupon_save_coupon' ) ) return $post_id;
+
+	// check the user
+	$post_type = get_post_type_object( $post->post_type );
+	if ( ! current_user_can( $post_type->cap->edit_post, $post_id ) ) return $post_id;
+
+	// check sanitize and save the data
+	$coupon_name	= empty( $_POST['sfn_gfcoupon_name'] ) ? delete_post_meta( $post_id, '_sfn_gfcoupon_name' ) : update_post_meta( $post_id, '_sfn_gfcoupon_name', sanitize_text_field( $_POST[ 'sfn_gfcoupon_name' ] ) );
+	$coupon_value 	= empty( $_POST['sfn_gfcoupon_value'] ) ? delete_post_meta( $post_id, '_sfn_gfcoupon_value' ) : update_post_meta( $post_id, '_sfn_gfcoupon_value', sanitize_text_field( $_POST[ 'sfn_gfcoupon_value' ] ) );
+
 }
 
 // @todo add the ability to change from % to $ value coupons
