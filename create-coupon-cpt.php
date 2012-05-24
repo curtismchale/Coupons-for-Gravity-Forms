@@ -45,4 +45,55 @@ function sfn_gfcoupon_coupon_cpt(){
 }
 
 add_action( 'init', 'sfn_gfcoupon_coupon_cpt' );
+
+// @todo add the meta boxes for coupon name and value
+/**
+ * Adding the hook that adds our metaboxes. Yes that is just a bit meta
+ *
+ * @since 	1.0
+ * @author 	WP Theme Tutorial, SFNdesign
+ */
+function sfn_gfcoupon_metaboxes_setup(){
+	add_action( 'add_meta_boxes', 'sfn_gfcoupon_add_post_meta_boxes' );
+}
+add_action( 'load-post.php', 'sfn_gfcoupon_metaboxes_setup' );
+add_action( 'load-post-new.php', 'sfn_gfcoupon_metaboxes_setup' );
+
+/**
+ * Adding the metabox function to the proper CPT and in the proper spot on the site
+ *
+ * @since 	1.0
+ * @author	WP Theme Tutorial, SFNdesign
+ */
+function sfn_gfcoupon_add_post_meta_boxes(){
+
+	add_meta_box(
+		'gfcoupon',
+		'Coupon',
+		'sfn_gfcoupon_meta_box',
+		'sfn_gfcoupon',
+		'normal',
+		'high'
+	);
+}
+
+function sfn_gfcoupon_meta_box( $object, $box ){
+
+	wp_nonce_field( basename( __FILE__ ), 'sfn_gfcoupon_nonce' );
+?>
+	<p>
+		<label for="sfn_gfcoupon_name"><?php _e( 'Coupon Name, the value the user will type.' ); ?></label>
+		<br />
+		<input class="left" type="text" name="sfn_gfcoupon_name" id="sfn_gfcoupon_name" value="<?php echo esc_attr( get_post_meta( $object->ID, 'sfn_gfcoupon_name', true ) ); ?>" size="10" />
+	</p>
+
+	<p>
+		<label for="sfn_gfcoupon_value"><?php _e( 'Coupon Value, how much off?' ); ?></label>
+		<br />
+		<input class="left" type="text" name="sfn_gfcoupon_value" id="sfn_gfcoupon_value" value="<?php echo esc_attr( get_post_meta( $object->ID, 'sfn_gfcoupon_value', true ) ); ?>" size="10" />
+	</p>
+<?php
+}
+
+// @todo add the ability to change from % to $ value coupons
 ?>
