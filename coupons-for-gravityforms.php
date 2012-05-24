@@ -191,7 +191,17 @@ function sfn_gfcoupon_validate_coupon() {
     exit;
 }
 
-add_filter('gform_validation', 'sfn_gfcoupon_coupon_validation');
+/**
+ * Validates the coupon and passes the discount to a global
+ * so that we can use it later.
+ *
+ * @param     $validation_result
+ * 
+ *
+ * @author    WP Theme Tutorial, SFNdesign
+ * @since     0.1
+ *
+ */
 function sfn_gfcoupon_coupon_validation($validation_result){
     global $coupons, $discount;
 
@@ -250,6 +260,7 @@ function sfn_gfcoupon_coupon_validation($validation_result){
 
     return $validation_result;
 }
+add_filter( 'gform_validation', 'sfn_gfcoupon_coupon_validation' );
 
 /**
  * Updates the product price with the new total so that it sends properly to PayPal
