@@ -175,8 +175,13 @@ function sfn_gfcoupon_get_field_by($attr, $attr_value, $fields){
     return false;
 }
 
-add_action('wp_ajax_validate_coupon', 'sfn_gfcoupon_validate_coupon');
-add_action('wp_ajax_nopriv_validate_coupon', 'sfn_gfcoupon_validate_coupon');
+/**
+ * Checks to make sure that there is a coupon with the name passed
+ *
+ * @author    WP Theme Tutorail, SFNdesign
+ * @since     0.1
+ *
+ */
 function sfn_gfcoupon_validate_coupon() {
     global $coupons;
 
@@ -190,6 +195,8 @@ function sfn_gfcoupon_validate_coupon() {
 
     exit;
 }
+add_action('wp_ajax_validate_coupon', 'sfn_gfcoupon_validate_coupon');
+add_action('wp_ajax_nopriv_validate_coupon', 'sfn_gfcoupon_validate_coupon');
 
 /**
  * Validates the coupon and passes the discount to a global
