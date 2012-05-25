@@ -32,7 +32,7 @@ function sfn_gfcoupon_coupon_cpt(){
 				// only useful if like pages 'parent'                => __()
 				), // end array for labels
 			'description'           => __('Coupons for Gravity Forms'),
-			'public'                => false,
+			'public'                => true,
 			'show_ui'				=> true,
 			'show_in_menu'			=> 'options-general.php',
 			'menu_position'         => 5, // sets admin menu position
@@ -43,10 +43,8 @@ function sfn_gfcoupon_coupon_cpt(){
 	);
 
 }
-
 add_action( 'init', 'sfn_gfcoupon_coupon_cpt' );
 
-// @todo add the meta boxes for coupon name and value
 /**
  * Adding the hook that adds our metaboxes. Yes that is just a bit meta
  *
