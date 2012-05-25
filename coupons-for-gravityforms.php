@@ -229,7 +229,8 @@ add_action('wp_ajax_nopriv_validate_coupon', 'sfn_gfcoupon_validate_coupon');
  *
  */
 function sfn_gfcoupon_coupon_validation($validation_result){
-    global $coupons, $discount;
+    global $total;
+
 	$coupons = sfn_gfcoupon_build_coupons();
 
     $form = $validation_result['form'];
@@ -301,11 +302,11 @@ add_filter( 'gform_validation', 'sfn_gfcoupon_coupon_validation' );
  * @author	WP Theme Tutorial, SFNdesign
  */
 function sfn_gfcoupon_update_product_info( $product_info, $form, $lead ){
-	global $discount;
+	global $total;
 
 	$id = $form['fields'][0]['id'];
 	$price = $product_info['products'][$id]['price'];
-	$product_info['products'][$id]['price'] = $price - $discount;
+	$product_info['products'][$id]['price'] = $total;
 
 	return $product_info;
 }
