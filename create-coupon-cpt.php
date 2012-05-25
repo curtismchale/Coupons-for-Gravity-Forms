@@ -32,7 +32,7 @@ function sfn_gfcoupon_coupon_cpt(){
 				// only useful if like pages 'parent'                => __()
 				), // end array for labels
 			'description'           => __('Coupons for Gravity Forms'),
-			'public'                => true,
+			'public'                => false,
 			'show_ui'				=> true,
 			'show_in_menu'			=> 'options-general.php',
 			'menu_position'         => 5, // sets admin menu position
