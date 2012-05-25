@@ -35,18 +35,36 @@ function sfn_gfcoupon_print_r($data) {
 }
 
 /**
- * You just enter the coupons in the $coupon variable in the code.
- * Then in the Gravity Forms admin you add the "gfcoupon" class to
- * whatever field will be your coupon field, "gfdiscount" to a new single
- * line text field you will need to add, and make sure you have a total
- * field on your form.
+ * Builds and returns the coupons that have been entered by the user.
+ *
+ * @return array 	The array of coupons for the form
+ *
+ * @since 	1.0
+ * @author 	WP Theme Tutorial, SFNdesign
+ *
+ * @todo 	it would probably be a good idea to save in a transient and only regenerate when needed
  */
+function sfn_gfcoupon_build_coupons(){
 
-$coupons = array(
-    "half" => "50",
-    "25OFF" => "25",
-    "BIGDISCOUNT" => "20"
-);
+	$coupons = array();
+
+	$args = array(
+		'posts_per_page' => -1,
+		'post_type' => 'sfn_gfcoupon',
+		'post_status' => 'scheduled'
+	);
+
+	$build_coupons = get_posts( $args );
+
+	// building our array of coupons
+	foreach( $build_coupons as $cou ){
+		$coupon_name = get_post_meta( $cou->ID, '_sfn_gfcoupon_name', true );
+		$coupon_value = get_post_meta( $cou->ID, '_sfn_gfcoupon_value', true );
+		$coupons[ $coupon_name ] = $coupon_value;
+	}
+
+	return $coupons;
+}
 
 add_filter('gform_pre_render', 'sfn_gfcoupon_add_coupon_support');
 function sfn_gfcoupon_add_coupon_support($form){
@@ -183,7 +201,8 @@ function sfn_gfcoupon_get_field_by($attr, $attr_value, $fields){
  *
  */
 function sfn_gfcoupon_validate_coupon() {
-    global $coupons;
+
+	$coupons = sfn_gfcoupon_build_coupons();
 
     $code = $_POST['code'];
 
@@ -211,6 +230,7 @@ add_action('wp_ajax_nopriv_validate_coupon', 'sfn_gfcoupon_validate_coupon');
  */
 function sfn_gfcoupon_coupon_validation($validation_result){
     global $coupons, $discount;
+	$coupons = sfn_gfcoupon_build_coupons();
 
     $form = $validation_result['form'];
 
