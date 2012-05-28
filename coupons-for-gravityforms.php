@@ -305,7 +305,17 @@ function sfn_gfcoupon_update_product_info( $product_info, $form, $lead ){
 	global $total;
 
 	$id = $form['fields'][0]['id'];
-	$price = $product_info['products'][$id]['price'];
+
+	/**
+	 * Figuring out which field is the product field so that we can know
+	 * what field to override before we send it to PayPal
+	 */
+	foreach( $form['fields'] as $field ){
+		if( $field['type'] == 'product' ){
+			$id = $field['id'];
+		}
+	}
+
 	$product_info['products'][$id]['price'] = $total;
 
 	return $product_info;
