@@ -81,6 +81,14 @@ function sfn_gfcoupon_add_post_meta_boxes(){
 function sfn_gfcoupon_meta_box( $object, $box ){
 
 	wp_nonce_field( 'sfn_gfcoupon_save_coupon', 'sfn_gfcoupon_nonce' );
+
+	$checked = get_post_meta( $object->ID, '_sfn_gfcoupon_type', true );
+
+	// if we have no option default to %
+	if( !$checked ){
+		$checked = 'percent';
+	}
+
 ?>
 	<p>
 		<label for="sfn_gfcoupon_name"><?php _e( 'Coupon Name, the value the user will type.' ); ?></label>
@@ -92,6 +100,12 @@ function sfn_gfcoupon_meta_box( $object, $box ){
 		<label for="sfn_gfcoupon_value"><?php _e( 'Coupon Value, how much off?' ); ?></label>
 		<br />
 		<input class="left" type="text" name="sfn_gfcoupon_value" id="sfn_gfcoupon_value" value="<?php echo esc_attr( get_post_meta( $object->ID, '_sfn_gfcoupon_value', true ) ); ?>" size="10" />
+	</p>
+
+	<p>Is it a % based discount or $ based discount?</p>
+	<p>
+		<input type="radio" name="sfn_gfcoupon_type" value="percent" <?php checked( 'percent', $checked ) ?> /> %<br /><br />
+		<input type="radio" name="sfn_gfcoupon_type" value="dollar" <?php checked( 'dollar', $checked ); ?> /> $<br /><br />
 	</p>
 <?php
 }
@@ -119,7 +133,10 @@ function sfn_gfcoupon_save_coupon_metabox( $post_id, $post ){
 	$coupon_name	= empty( $_POST['sfn_gfcoupon_name'] ) ? delete_post_meta( $post_id, '_sfn_gfcoupon_name' ) : update_post_meta( $post_id, '_sfn_gfcoupon_name', sanitize_text_field( $_POST[ 'sfn_gfcoupon_name' ] ) );
 	$coupon_value 	= empty( $_POST['sfn_gfcoupon_value'] ) ? delete_post_meta( $post_id, '_sfn_gfcoupon_value' ) : update_post_meta( $post_id, '_sfn_gfcoupon_value', sanitize_text_field( $_POST[ 'sfn_gfcoupon_value' ] ) );
 
-}
+	// check sanitize and save the data for the % and $ radio buttons
+	if( isset( $_POST[ 'sfn_gfcoupon_type' ] ) ){
+		$badge = ! in_array( $_POST['sfn_gfcoupon_type'], array( 'percent', 'dollar' ) ) ? delete_post_meta( $post_id, '_sfn_gfcoupon_type' ) : update_post_meta( $post_id, '_sfn_gfcoupon_type', $_POST[ 'sfn_gfcoupon_type' ] );
+	}
 
-// @todo add the ability to change from % to $ value coupons
+}
 ?>
