@@ -10,6 +10,11 @@ License: GNU General Public License v2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
+/**
+ * @TODO - bug - get the pricing to not change during Ajax form submit
+ * @todo update the 'expire/published' notice in the admin so that the language reads better
+ */
+
 
 /* calls the new CPT  that will make up the coupons */
 require_once( plugin_dir_path( __FILE__ ) . '/create-coupon-cpt.php' );
