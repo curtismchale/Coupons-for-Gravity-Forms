@@ -56,7 +56,7 @@ function sfn_gfcoupon_build_coupons(){
 	$args = array(
 		'posts_per_page' => -1,
 		'post_type' => 'sfn_gfcoupon',
-		'post_status' => 'scheduled'
+		'post_status' => 'future'
 	);
 
 	$build_coupons = get_posts( $args );
