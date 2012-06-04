@@ -85,7 +85,7 @@ function sfn_gfcoupon_add_coupon_support($form){
 
     <style type="text/css">
 
-        .apply-coupon { text-transform: uppercase; font-size: .75em; padding: .2em .5em; background-color: #f7f7f7; border: 1px solid #e7e7e7;
+        .apply-coupon {text-transform:uppercase; font-size:.75em; font-weight:bold; padding:.2em .5em; background-color:#CCC; border: 1px solid #333;
             text-decoration: none; color: #333; margin-left: .5em; }
         .apply-coupon:hover { background-color: #ffffe0; border-color: #e6db55; }
         .apply-coupon:active { background-color: #f2f2c9; }
