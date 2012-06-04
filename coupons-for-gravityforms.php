@@ -231,22 +231,14 @@ function sfn_gfcoupon_validate_coupon() {
 
 	$coupons = sfn_gfcoupon_build_coupons();
 
-  $code = $_POST['data'];
+  	$code = $_POST['data'];
 
-  foreach( $coupons as $coupon ){
-    if( $code === $coupon['name'] ){
-      $cou = json_encode( $coupon );
-      echo $cou;
-    }
-  }
-
-/*
-   if(array_key_exists($code, $coupons)) {
-      echo $coupons[$code];
-    } else {
-        echo 0;
-    }
- */
+	foreach( $coupons as $coupon ){
+		if( $code === $coupon['name'] ){
+		  $cou = json_encode( $coupon );
+		  echo $cou;
+		}
+	}
 
     exit;
 }
