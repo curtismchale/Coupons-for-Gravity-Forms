@@ -62,11 +62,18 @@ function sfn_gfcoupon_build_coupons(){
 	$build_coupons = get_posts( $args );
 
 	// building our array of coupons
-	foreach( $build_coupons as $cou ){
+  foreach( $build_coupons as $cou ){
 		$coupon_name = get_post_meta( $cou->ID, '_sfn_gfcoupon_name', true );
-		$coupon_value = get_post_meta( $cou->ID, '_sfn_gfcoupon_value', true );
-		$coupons[ $coupon_name ] = $coupon_value;
-	}
+    $coupon_value = get_post_meta( $cou->ID, '_sfn_gfcoupon_value', true );
+    $coupon_type = get_post_meta( $cou->ID, '_sfn_gfcoupon_type', true );
+    $id = $cou->ID;
+
+    $coupons[] = 	array(
+      'name' => $coupon_name,
+      'value' => $coupon_value,
+      'type' => $coupon_type,
+    );
+  }
 
 	return $coupons;
 }
@@ -135,10 +142,25 @@ function sfn_gfcoupon_add_coupon_support($form){
                 var value = 0;
                 var discount = 0;
 
-                jQuery.post(gfcoupon.ajaxurl, { action : 'validate_coupon', code : code }, function(response){
+                jQuery.post(gfcoupon.ajaxurl, { action : 'validate_coupon', dataType: 'json', data : code }, function(response){
+
+					// parsing our request in to variables so we can use it
+					var return_value = JSON.parse( response );
+					var coupon_type = return_value.type;
+					var coupon_value = return_value.value;
+
                     if(response != 0) {
-                        value = parseInt(response);
-                        discount = (total * value) / 100;
+                        value = parseInt( coupon_value );
+
+						// handle the % based coupon math
+						if( coupon_type === 'percent' ){
+							discount = (total * value) / 100;
+						}
+
+						// handle the $ based coupon math
+						if( coupon_type === 'dollar' ){
+							discount = value;
+						}
                         discount = discount.toFixed(2);
 
                         jQuery(discountField).val('-' + discount);
@@ -209,13 +231,22 @@ function sfn_gfcoupon_validate_coupon() {
 
 	$coupons = sfn_gfcoupon_build_coupons();
 
-    $code = $_POST['code'];
+  $code = $_POST['data'];
 
-    if(array_key_exists($code, $coupons)) {
-        echo $coupons[$code];
+  foreach( $coupons as $coupon ){
+    if( $code === $coupon['name'] ){
+      $cou = json_encode( $coupon );
+      echo $cou;
+    }
+  }
+
+/*
+   if(array_key_exists($code, $coupons)) {
+      echo $coupons[$code];
     } else {
         echo 0;
     }
+ */
 
     exit;
 }
