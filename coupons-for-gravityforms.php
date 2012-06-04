@@ -201,7 +201,7 @@ function sfn_gfcoupon_get_field_by($attr, $attr_value, $fields){
 /**
  * Checks to make sure that there is a coupon with the name passed
  *
- * @author    WP Theme Tutorail, SFNdesign
+ * @author    WP Theme Tutorial, SFNdesign
  * @since     0.1
  *
  */
