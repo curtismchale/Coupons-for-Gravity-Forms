@@ -3,30 +3,38 @@
 Contributors: Curtis McHale
 Tags: gravity forms, coupons
 Requires at least: 3.0
-Tested up to: 3.3
-Stable tag: 0.1
+Tested up to: 3.4
+Stable tag: 1.0
 
 Adds coupon support to Gravity Forms.
 
 == Description ==
 
-Adds coupon support to Gravity Forms. Requires Gravity Forms and the
-Gravity Forms PayPal addon.
+Adds coupon support to Gravity Forms. Requires Gravity Forms and the Gravity Forms PayPal addon. Coupons expire and
+can be % or $ based discounts.
 
-Currently it's quick and dirty. You add coupons by adding to the array in the plugin.
-All discounts are percentage based only. Coupon codes are case sensitive. Only tested
-with PayPal.
+Add Coupons from the coupon menu under Settings. To have a coupon live make it a 'scheduled' WordPress post. When a
+coupon is 'published' it will no longer work.
+
+There is currently NO support for coupons/discounts on subscriptions.
 
 == Installation ==
 
-1. Extract to your wp-content/plugins/
-folder.
+1. Extract to your wp-content/plugins/ folder.
 
 2. Activate the plugin.
 
-3. Add coupons by adding to the array inside the plugin.
+3. Add coupons by adding items to the coupon custom post type.
 
 == Changelog ==
+
+= 1.0 =
+
+- added coupon custom post type
+- added % and $ based discounts
+- updated for latest GF and PayPal plugins
+- added coupon expiration
+- Many thanks to http://www.onlinecardclasses.com/stretchyourstamps/ for needing the features and financing the development
 
 = 0.1 =
 
