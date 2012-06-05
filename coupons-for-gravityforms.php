@@ -286,7 +286,17 @@ function sfn_gfcoupon_coupon_validation($validation_result){
     if(empty($discount))
         return $validation_result;
 
-    if(!array_key_exists($coupon, $coupons)) {
+	foreach( $coupons as $cou ){
+		if( $cou['name'] === $coupon ){
+			$coupon_name = $cou['name'];
+			$coupon_value = $cou['value'];
+			$coupon_type = $cou['type'];
+			break;
+		}
+	}
+
+	// coupon name is empty so we don't have a valid coupon
+    if( empty( $coupon_name ) ) {
 
         $coupon_field['failed_validation'] = true;
         $coupon_field['validation_message'] = "This coupon is not valid.";
@@ -294,20 +304,6 @@ function sfn_gfcoupon_coupon_validation($validation_result){
         $validation_result['is_valid'] = false;
         $validation_result['form'] = $form;
 
-        return $validation_result;
-    }
-
-    $coupon_value = $coupons[$coupon];
-    $discount_abs = abs($discount);
-    $discount_check = round(($total + $discount_abs) * ($coupon_value / 100));
-    $discount_abs = round($discount_abs);
-
-    if($discount_abs != $discount_check) {
-        $validation_result['is_valid'] = false;
-        $coupon_field['failed_validation'] = true;
-        $coupon_field['validation_message'] = "There was an error processing this coupon.";
-
-        $validation_result['form'] = $form;
         return $validation_result;
     }
 
