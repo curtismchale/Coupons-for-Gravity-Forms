@@ -18,6 +18,13 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 /* calls the new CPT  that will make up the coupons */
 require_once( plugin_dir_path( __FILE__ ) . '/create-coupon-cpt.php' );
 
+/**
+ * Updater class for WordPress plugins hosted with Github.
+ *
+ * @since 	1.1
+ * @author 	WP Theme Tutorial, Curtis McHale
+ * @link 	https://github.com/jkudish/WordPress-GitHub-Plugin-Updater
+ */
 function sfn_gfcoupon_github_updater(){
 
   /* includes the update from Github code */
