@@ -18,6 +18,8 @@ coupon is 'published' it will no longer work.
 
 There is currently NO support for coupons/discounts on subscriptions.
 
+** Does not currently handle discounts for subscriptions.
+
 == Installation ==
 
 1. Extract to your wp-content/plugins/ folder.
@@ -25,6 +27,14 @@ There is currently NO support for coupons/discounts on subscriptions.
 2. Activate the plugin.
 
 3. Add coupons by adding items to the coupon custom post type.
+
+4. Set up the coupon fields in your form with the instructions below.
+
+  You just enter the coupons in the $coupon variable in the code.
+  Then in the Gravity Forms admin you add the "gfcoupon" class to
+  whatever field will be your coupon field, "gfdiscount" to a new single
+  line text field you will need to add, and make sure you have a total
+  field on your form.
 
 == Changelog ==
 
