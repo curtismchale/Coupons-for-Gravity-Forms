@@ -3,7 +3,7 @@
 Plugin Name: Coupons for Gravity Forms
 Plugin URI:
 Description: Adds coupon support for Gravity Forms
-Version: 0.1
+Version: 1.1
 Author: WP Theme Tutorial - Curtis McHale
 Author URI: http://wpthemetutotial.com/about/
 License: GNU General Public License v2.0
