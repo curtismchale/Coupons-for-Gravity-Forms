@@ -10,11 +10,9 @@ Adds coupon support to Gravity Forms.
 
 == Description ==
 
-Adds coupon support to Gravity Forms. Requires Gravity Forms and the Gravity Forms PayPal addon. Coupons expire and
-can be % or $ based discounts.
+Adds coupon support to Gravity Forms. Requires Gravity Forms and the Gravity Forms PayPal addon. Coupons expire and can be % or $ based discounts.
 
-Add Coupons from the coupon menu under Settings. To have a coupon live make it a 'scheduled' WordPress post. When a
-coupon is 'published' it will no longer work.
+Add Coupons from the coupon menu under Settings. To have a coupon live make it a 'scheduled' WordPress post. When a coupon is 'published' it will no longer work.
 
 There is currently NO support for coupons/discounts on subscriptions.
 
