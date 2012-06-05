@@ -6,6 +6,8 @@ Requires at least: 3.0
 Tested up to: 3.4
 Stable tag: 1.0
 
+~Current Version:1.0~
+
 Adds coupon support to Gravity Forms.
 
 == Description ==
