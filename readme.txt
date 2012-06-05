@@ -4,9 +4,9 @@ Contributors: Curtis McHale
 Tags: gravity forms, coupons
 Requires at least: 3.0
 Tested up to: 3.4
-Stable tag: 1.0
+Stable tag: 1.1
 
-~Current Version:1.0~
+~Current Version:1.1~
 
 Adds coupon support to Gravity Forms.
 
@@ -35,6 +35,10 @@ There is currently NO support for coupons/discounts on subscriptions.
   field on your form.
 
 == Changelog ==
+
+= 1.1 =
+
+- adding the Github WordPress plugin updater class https://github.com/jkudish/WordPress-GitHub-Plugin-Updater
 
 = 1.0 =
 
