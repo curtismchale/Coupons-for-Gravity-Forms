@@ -18,8 +18,6 @@ coupon is 'published' it will no longer work.
 
 There is currently NO support for coupons/discounts on subscriptions.
 
-** Does not currently handle discounts for subscriptions.
-
 == Installation ==
 
 1. Extract to your wp-content/plugins/ folder.
