@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<forms version="1.6.8.1">
+	<form labelPlacement="top_label" useCurrentUserAsAuthor="1">
+		<title><![CDATA[Coupon Form]]></title>
+		<description><![CDATA[We would love to hear from you! Please fill out this form and we will get in touch with you shortly.]]></description>
+		<confirmation type="message">
+			<message><![CDATA[Thanks for contacting us! We will get in touch with you shortly.]]></message>
+		</confirmation>
+		<button type="text">
+			<text><![CDATA[Submit]]></text>
+		</button>
+		<fields>
+			<field id="8" size="medium" type="product" inputType="singleproduct" disableQuantity="1">
+				<label><![CDATA[Product Name]]></label>
+				<inputs>
+					<input id="8.1">
+						<label><![CDATA[Name]]></label>
+					</input>
+					<input id="8.2">
+						<label><![CDATA[Price]]></label>
+					</input>
+					<input id="8.3">
+						<label><![CDATA[Quantity]]></label>
+					</input>
+				</inputs>
+				<basePrice><![CDATA[$82.00]]></basePrice>
+			</field>
+			<field id="1" size="medium" type="text">
+				<cssClass><![CDATA[gfcoupon]]></cssClass>
+				<label><![CDATA[Coupon Code]]></label>
+			</field>
+			<field id="2" size="medium" type="text">
+				<cssClass><![CDATA[gfdiscount]]></cssClass>
+				<label><![CDATA[discount - hidden]]></label>
+			</field>
+			<field id="3" size="medium" type="total">
+				<label><![CDATA[Total]]></label>
+			</field>
+			<field id="5" size="medium" type="name">
+				<label><![CDATA[Name]]></label>
+				<inputs>
+					<input id="5.3">
+						<label><![CDATA[First]]></label>
+					</input>
+					<input id="5.6">
+						<label><![CDATA[Last]]></label>
+					</input>
+				</inputs>
+			</field>
+			<field id="6" size="medium" type="address">
+				<label><![CDATA[Address]]></label>
+				<inputs>
+					<input id="6.1">
+						<label><![CDATA[Street Address]]></label>
+					</input>
+					<input id="6.2">
+						<label><![CDATA[Address Line 2]]></label>
+					</input>
+					<input id="6.3">
+						<label><![CDATA[City]]></label>
+					</input>
+					<input id="6.4">
+						<label><![CDATA[State / Province]]></label>
+					</input>
+					<input id="6.5">
+						<label><![CDATA[Zip / Postal Code]]></label>
+					</input>
+					<input id="6.6">
+						<label><![CDATA[Country]]></label>
+					</input>
+				</inputs>
+			</field>
+			<field id="7" size="medium" type="email">
+				<label><![CDATA[Email]]></label>
+			</field>
+		</fields>
+		<descriptionPlacement><![CDATA[below]]></descriptionPlacement>
+		<notification>
+			<to><![CDATA[curtis@curtismchale.ca]]></to>
+			<subject><![CDATA[New submission from {form_title}]]></subject>
+			<message><![CDATA[{all_fields}]]></message>
+		</notification>
+	</form>
+</forms>
