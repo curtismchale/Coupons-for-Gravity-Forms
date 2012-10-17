@@ -87,6 +87,11 @@ work. Coupons need to be SCHEDULED to work.
 
 == Changelog ==
 
+= 1.3 =
+
+- documentation update
+- added sample form for download
+
 = 1.1 =
 
 - adding the Github WordPress plugin updater class https://github.com/jkudish/WordPress-GitHub-Plugin-Updater
