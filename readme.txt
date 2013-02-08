@@ -8,6 +8,8 @@ Stable tag: 1.2
 
 ~Current Version:1.3~
 
+NOTE: Lots of bugs have been reported. A rewrite is planned, but I'm super busy with client work and can't get to it. There is no ETA on the rewrite.
+
 Adds coupon support to Gravity Forms.
 
 == Description ==
