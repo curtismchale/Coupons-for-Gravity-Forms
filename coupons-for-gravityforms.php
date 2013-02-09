@@ -199,7 +199,8 @@ function sfn_gfcoupon_add_coupon_support($form){
 
                         var newPrice = ( total - discount );
                         jQuery( totalField ).val( newPrice );
-                        jQuery( '.ginput_total_'+formID ).html( '$'+newPrice );
+                        var currency = new Currency( gf_global.gf_currency_config );
+                        jQuery( '.ginput_total_'+formID ).html( currency.toMoney( newPrice ) );
 
                         couponApplied = true;
                     } else {
